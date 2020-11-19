@@ -14,25 +14,13 @@
 <script>
   export default {
     name: "UserList",
-    data() {
-      return {
-        users: []
-      }
+    props: {
+      users: {}
     },
     mounted() {
-      const accessToken = localStorage.getItem('access_token')
-      if (accessToken) {
-        this.$axios.get('/users/all',
-          {
-            headers: {'Authorization': `Bearer ${accessToken}`}
-          }).then(response => {
-          console.log(response.data)
-          this.users = response.data
-        })
-      }
     },
     methods: {
-      fullName: (user)=>{
+      fullName: (user) => {
         return user.last_name + ' ' + user.first_name + ' ' + user.patronymic
       }
     }

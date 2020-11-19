@@ -25,14 +25,16 @@
     },
     methods: {
       onSuccess(googleUser) {
-        this.$axios.post('/security/google-auth', {access_token: googleUser.getAuthResponse().id_token}).then(response=>{
+        const idToken = googleUser.getAuthResponse().id_token
+        this.$axios.post('/security/google-auth', {access_token: idToken}).then(response=>{
           if (response.status === 200) {
             console.log(response.data)
             localStorage.setItem('access_token', response.data.access_token)
-            this.$router.push('user')
+            this.$router.push('/')
           }
         }).catch(error=>{
           if (error.response.status === 403) {
+            localStorage.setItem('google_token', idToken)
             this.$router.push('registration')
           }
         })

@@ -1,7 +1,6 @@
 from typing import List
 
-from fastapi import APIRouter, Depends, Form, File
-from starlette.responses import JSONResponse
+from fastapi import APIRouter, Depends
 
 from api.services.auth.user_auth import get_current_active_user
 from api.services.users.schemas import UserSerialized

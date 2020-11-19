@@ -5,12 +5,18 @@
 </template>
 
 <script>
-    import GoogleSignIn from "../GoogleSignIn";
+  import GoogleSignIn from "../GoogleSignIn";
+
   export default {
-    name: "Home",
+    name: "Login",
     components: {
       GoogleSignIn
     },
+    mounted() {
+      if (localStorage.getItem('access_token')) {
+        this.$router.push('/')
+      }
+    }
   }
 </script>
 

@@ -9,10 +9,21 @@
   import RegistrationForm from "../RegistrationForm";
   export default {
     name: "Registration",
-    components: {RegistrationForm}
+    components: {RegistrationForm},
+    mounted() {
+      if (localStorage.getItem('access_token')) {
+        this.$router.push('/')
+      }
+      else if (!localStorage.getItem('google_token')) {
+        this.$router.push('/')
+      }
+    }
   }
 </script>
 
-<style scoped>
+<style scoped lang="scss">
+    h1 {
+        text-align: left;
+    }
 
 </style>
