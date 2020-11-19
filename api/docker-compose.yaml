@@ -1,0 +1,16 @@
+version: "3.3"
+services:
+  db:
+    image: postgres:latest
+    container_name: emphasoft_postgres
+    environment:
+      POSTGRES_DB: emphasoft_db
+      POSTGRES_USER: emphasoft_user
+      POSTGRES_PASSWORD: 123456
+    volumes:
+      - ./postgres/pgdata:/var/lib/postgresql/data
+    ports:
+      - 5432:5432
+volumes:
+  pgdata:
+

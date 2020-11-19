@@ -1,0 +1,20 @@
+app:
+  host: 0.0.0.0
+  port: 1984
+  workers: 4
+  reload: true
+  origins: http://0.0.0.0:8080, http://localhost:8080, http://localhost
+  secret_key: secret_key
+front_app:
+  front_app_url: http://localhost:8080
+databases:
+  postgres_url: postgres://emphasoft_user:123456@0.0.0.0:5432/emphasoft_db
+  postgres_host: 0.0.0.0
+  postgres_port: 5432
+  postgres_name: emphasoft_db
+  postgres_user: emphasoft_user
+  postgres_password: 123456
+google:
+  google_client_id: 506305560363-57e5shd6i2dc34cvd0u2peisvv5t261n.apps.googleusercontent.com
+  google_client_secret: OzpzlvR3aDcWyN8hdXsrAuxO
+  google_api_key: AIzaSyDZkMfqb1uxsiHpIocDq7YkgvsEXfWuYc8
