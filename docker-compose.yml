@@ -2,19 +2,19 @@ version: "3.3"
 services:
   backend:
     build: ./api
+    container_name: emphasoft_backend
+    environment:
+      PRODUCTION: 'yes'
     ports:
       - "1984:1984"
     command: bash -c "python -m api.main"
-    volumes:
-      - image_data:/app/data
     depends_on:
       - db
   frontend:
     build: ./frontend/emphasoft-front
+    container_name: emphasoft_frontend
     ports:
       - "8080:8080"
-    volumes:
-      - image_data:/app/src/assets/avatars
     depends_on:
       - backend
   db:
@@ -30,4 +30,3 @@ services:
       - 5432:5432
 volumes:
   pgdata:
-  image_data:

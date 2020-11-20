@@ -6,7 +6,5 @@ migrator = PostgresqlMigrator(db)
 
 with db.atomic():
     migrate(
-        migrator.add_column('users', 'hashed_password',
-                            CharField(max_length=255, null=True)
-                            )
+        migrator.alter_column_type('users', 'avatar', TextField(null=True))
     )

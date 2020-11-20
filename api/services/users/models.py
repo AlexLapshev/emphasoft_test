@@ -11,7 +11,7 @@ class User(peewee.Model):
     patronymic = peewee.CharField(max_length=50, null=True)
     email = peewee.CharField(max_length=50, unique=True)
     active = peewee.BooleanField(default=False)
-    avatar = peewee.CharField(max_length=255, null=True)
+    avatar = peewee.TextField(null=True)
     hashed_password = peewee.CharField(max_length=255, null=True)
 
     class Meta:

@@ -1,11 +1,18 @@
 import yaml
+import os
+
 from loguru import logger
 
 
 from api.config.schemas import Settings
 
-with open('api/config/debug-settings.yaml') as f:
-    logger.debug('reading settings file')
+settings_file = 'debug-settings.yaml'
+
+if os.environ.get('PRODUCTION'):
+    settings_file = 'production-settings.yaml'
+
+with open(f'api/config/{settings_file}') as f:
+    logger.debug(f'reading settings file {settings_file}')
     settings = yaml.safe_load(f)
 
 

@@ -34,7 +34,7 @@ def authenticate_user(email: str, password: str) -> UserSchema or None:
     return user
 
 
-def get_current_user(token: str = Depends(oauth2_scheme), conn=Depends(get_db)) -> UserSchema:
+def get_current_user(token: str = Depends(oauth2_scheme), dependencies=[Depends(get_db)]) -> UserSchema:
     credentials_exception = HTTPException(
         status_code=status.HTTP_401_UNAUTHORIZED,
         detail="Could not validate credentials",

@@ -7,7 +7,6 @@ from api.config.main import main_config
 from api.database.peewee_connection import db
 from api.middleware.authentication_middleware import BasicAuthBackend, on_auth_error
 from api.services.auth.router import security
-from api.services.images.router import images
 from api.services.users.models import User
 from api.services.users.router import users
 
@@ -31,7 +30,6 @@ def create_app():
                        )
     app.include_router(users, prefix='/api/v1/users', tags=['users'])
     app.include_router(security, prefix='/api/v1/security', tags=['security'])
-    app.include_router(images, prefix='/api/v1/images', tags=['images'])
     return app
 
 
