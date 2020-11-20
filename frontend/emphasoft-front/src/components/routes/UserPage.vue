@@ -1,5 +1,8 @@
 <template>
     <div class="container">
+        <h3>
+            Привет, {{me.first_name}}
+        </h3>
         <UserList :users="users"></UserList>
     </div>
 </template>
@@ -11,17 +14,18 @@
     components: {UserList},
     data () {
       return {
+        me: {},
         users: []
       }
     },
     mounted() {
       const accessToken = localStorage.getItem('access_token')
       if (accessToken) {
-        this.$axios.get('/users/all',
-          {
-            headers: {'Authorization': `Bearer ${accessToken}`}
-          }).then(response => {
-          console.log(response.data)
+        const config = {headers: {'Authorization': `Bearer ${accessToken}`}}
+        this.$axios.get('/users/me', config).then(response=>{
+          this.me = response.data
+        })
+        this.$axios.get('/users/all', config).then(response => {
           this.users = response.data
         })
       }

@@ -14,18 +14,26 @@ class UserCRUD:
             return UserSchema.from_orm(user)
 
     @staticmethod
+    def get_user_by_id(user_id: int) -> UserSchema:
+        if user := User.get_or_none(User.user_id == user_id):
+            logger.debug(f'user found by id: {user.user_id}')
+            return UserSchema.from_orm(user)
+
+    @staticmethod
     def update_user_by_email(email: str,
                              first_name: str,
                              last_name: str,
                              patronymic: str,
-                             hashed_password: str):
+                             hashed_password: str,
+                             avatar: str):
         logger.debug(f'updating user with email: {email}')
         User.update(
             first_name=first_name,
             last_name=last_name,
             patronymic=patronymic,
             hashed_password=hashed_password,
-            active=True).where(User.email == email).execute()
+            active=True,
+            avatar=avatar).where(User.email == email).execute()
 
     @staticmethod
     def get_all_users() -> List[UserSchema]:

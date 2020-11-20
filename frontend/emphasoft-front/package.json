@@ -9,8 +9,6 @@
   },
   "dependencies": {
     "axios": "^0.21.0",
-    "bootstrap": "^4.5.3",
-    "bootstrap-vue": "^2.19.0",
     "coffee-script": "^1.12.7",
     "core-js": "^3.6.5",
     "gapi": "0.0.3",

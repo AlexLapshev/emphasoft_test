@@ -22,8 +22,4 @@
 </script>
 
 <style scoped lang="scss">
-    h1 {
-        text-align: left;
-    }
-
 </style>

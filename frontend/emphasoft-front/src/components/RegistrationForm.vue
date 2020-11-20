@@ -7,7 +7,14 @@
             <vs-input v-model="password1" class="registration-form__field" type="password" placeholder="Пароль"/>
             <vs-input v-model="password2" class="registration-form__field" type="password"
                       placeholder="Повторите пароль"/>
-            <vs-button gradient type="submit">Зарегистрироваться</vs-button>
+            <vs-input
+                    label="Загрузите аватар"
+                    type="file" name="avatar"
+                    class="registration-form__file"
+                    @change="avatarUpload"
+
+            ></vs-input>
+            <vs-button class="btn-submit" gradient type="submit">Зарегистрироваться</vs-button>
             <Error
                     :error="error"
             ></Error>
@@ -24,11 +31,12 @@
     data() {
       return {
         error: null,
-        firstName: 'Алексей',
-        lastName: 'Лапшев',
-        patronymic: 'Николаевич',
-        password1: '123456789',
-        password2: '123456789'
+        firstName: '',
+        lastName: '',
+        patronymic: '',
+        password1: '',
+        password2: '',
+        avatar: null
       }
     },
     methods: {
@@ -41,6 +49,7 @@
           formData.append('last_name', this.lastName)
           formData.append('patronymic', this.patronymic)
           formData.append('password', this.password1)
+          formData.append('avatar', this.avatar)
           this.$axios.post('/security/register', formData, {
             headers: {
               'Content-Type': 'multipart/form-data'
@@ -59,7 +68,8 @@
           this.lastName === '' ||
           this.patronymic === '' ||
           this.password1 === '' ||
-          this.password2 === '') {
+          this.password2 === '' ||
+          this.avatar === null) {
           this.error = 'Все поля должны быть заполнены'
           return false
         }
@@ -73,7 +83,6 @@
           this.error = 'Пароль слишком короткий'
           return false
         }
-
         return true
       },
       validateData() {
@@ -95,18 +104,42 @@
           return false
         }
         return true
+      },
+      avatarUpload(event) {
+        if (event.target.files[0]) {
+          const image = event.target.files[0]
+          console.log(image.size, 10 ** 6 * 2)
+          if (!['jpg', 'jpeg', 'png'].includes(image.name.split('.').pop())) {
+            this.error = 'Некорекктное изображение'
+            return
+          }
+          if (image.size > 10 ** 6 * 2) {
+            this.error = 'Размер изображения слишком большой'
+            return
+          }
+          this.error = null
+          this.avatar = event.target.files[0]
+        }
       }
-
     }
   }
 </script>
 
 <style scoped lang="scss">
     .registration-form {
-        margin: 0 auto;
-
+        form {
+            display: inline-block;
+            .btn-submit {
+                margin: 10px auto 0 auto;
+                padding: 0 25px;
+            }
+        }
         &__field {
             padding-bottom: 8px;
+        }
+
+        &__file {
+            padding-top: 14px;
         }
     }
 </style>

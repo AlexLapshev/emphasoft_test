@@ -22,6 +22,7 @@ class SettingsApp(BaseSettings):
     port: int
     workers: int
     secret_key: str
+    image_path: str
 
 
 class SettingsGoogle(BaseSettings):

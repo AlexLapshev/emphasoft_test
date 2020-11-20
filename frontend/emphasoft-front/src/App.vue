@@ -22,8 +22,10 @@ export default {
   color: #2c3e50;
   margin-top: 60px;
   .container {
+    width: 100%;
     margin: 0;
     padding: 0;
+    align-items: center;
   }
 }
 </style>

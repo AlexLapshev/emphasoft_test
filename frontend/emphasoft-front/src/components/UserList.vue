@@ -1,34 +1,32 @@
 <template>
     <div class="user-list">
-        <ul>
-            <li
-                    v-for="user in users"
-                    :key="user.id"
-            >
-                {{fullName(user)}}
-            </li>
-        </ul>
+        <UserPreview
+                v-for="user in users"
+                :key="user.id"
+                :user="user"
+        ></UserPreview>
     </div>
 </template>
 
 <script>
+  import UserPreview from "./UserPreview";
+
   export default {
     name: "UserList",
+    components: {
+      UserPreview
+    },
     props: {
       users: {}
     },
     mounted() {
     },
-    methods: {
-      fullName: (user) => {
-        return user.last_name + ' ' + user.first_name + ' ' + user.patronymic
-      }
-    }
   }
 </script>
 
 <style scoped lang="scss">
-    ul {
-        list-style: none;
+    .user-list {
+        display: flex;
+        justify-content: center;
     }
 </style>
