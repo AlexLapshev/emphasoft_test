@@ -18,7 +18,7 @@ services:
     depends_on:
       - backend
   db:
-    image: postgres:latest
+    image: postgres:12
     container_name: emphasoft_postgres
     environment:
       POSTGRES_DB: emphasoft_db
